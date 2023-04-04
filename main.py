@@ -1,66 +1,13 @@
 import random
+import hangman_words
+import hangman_art
 
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
-
-word_list = ["aardvark", "baboon", "camel"]
+from hangman_words import word_list
 chosen_word = random.choice(word_list)
 word_length = len(chosen_word)
 lives = 6
+from hangman_art import logo, stages
+print(logo)
 
 display = []
 
@@ -71,6 +18,9 @@ game_over = False
 
 while game_over == False: 
   guess = input("Guess a letter: ").lower()
+
+  if guess in display: 
+    print("You've already successfully guessed this letter already")
 
   guess_successful = False
   
@@ -89,10 +39,10 @@ while game_over == False:
       print(f"The answer was {chosen_word}")
       game_over = True
   elif guess_successful == True: 
-    print("Good guess!")
-    
+    print("Keep going!")
+  
   print(stages[lives])
-  print(f"{display} \n")
+  print(f"{' '.join(display)}")
 
   if "_" not in display: 
     game_over = True
