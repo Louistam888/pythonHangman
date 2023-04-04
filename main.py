@@ -1,6 +1,7 @@
 import random
 import hangman_words
 import hangman_art
+import os
 
 from hangman_words import word_list
 chosen_word = random.choice(word_list)
@@ -8,6 +9,10 @@ word_length = len(chosen_word)
 lives = 6
 from hangman_art import logo, stages
 print(logo)
+
+def clear_screen():
+    """Clears the console screen."""
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 display = []
 
@@ -18,6 +23,8 @@ game_over = False
 
 while game_over == False: 
   guess = input("Guess a letter: ").lower()
+
+  clear_screen()
 
   if guess in display: 
     print("You've already successfully guessed this letter already")
